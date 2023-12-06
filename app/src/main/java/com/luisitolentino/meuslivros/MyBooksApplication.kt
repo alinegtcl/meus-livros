@@ -15,7 +15,7 @@ class MyBooksApplication : Application() {
 
         startKoin {
             androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
-            androidContext(applicationContext)
+            androidContext(this@MyBooksApplication)
             modules(appModules)
         }
     }
