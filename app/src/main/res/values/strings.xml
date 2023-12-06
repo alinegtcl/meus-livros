@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Meus Livros</string>
+    <string name="label_you_dont_have_books">Você não tem livros adicionados</string>
+    <string name="label_add_book">Adicionar livro</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

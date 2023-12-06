@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_marginHorizontal="16dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".presentation.view.fragment.AddBookFragment">
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        android:text="nome"-->
+<!--        android:textSize="18sp" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/editTextName"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textSize="18sp" />-->
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="autores"-->
+<!--        android:textSize="18sp" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/editTextWriters"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textSize="18sp" />-->
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="status"-->
+<!--        android:textSize="18sp" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/editTextStatus"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textSize="18sp" />-->
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonAddBook"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="@string/label_add_book" />
+
+</LinearLayout>
