@@ -32,7 +32,7 @@ class BookControlViewModel(private val useCase: BookControlUseCase) : ViewModel(
             _stateList.value = ListBookState.HideLoading
             response.flow(
                 { books ->
-                    if (books.size > 1)
+                    if (books.isNotEmpty())
                         _stateList.value = ListBookState.SearchAllSuccess(books)
                     else
                         _stateList.value = ListBookState.EmptyState
