@@ -51,11 +51,12 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
     implementation("androidx.navigation:navigation-dynamic-features-fragment:2.7.5")
 
-    implementation ("androidx.room:room-runtime:2.6.0")
-    implementation ("androidx.room:room-ktx:2.6.0")
+    implementation("androidx.room:room-runtime:2.6.0")
+    implementation("androidx.room:room-ktx:2.6.0")
     ksp("androidx.room:room-compiler:2.6.0")
 
-    implementation ("io.insert-koin:koin-android:3.1.2")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("io.insert-koin:koin-android:3.1.2")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
