@@ -1,6 +1,7 @@
 package com.luisitolentino.meuslivros.data.datasource
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
@@ -14,6 +15,9 @@ interface BooksDao {
 
     @Update
     suspend fun update(book: BookEntity)
+
+    @Delete
+    suspend fun delete(book: BookEntity)
 
     @Query("SELECT * FROM bookentity ORDER BY name")
     suspend fun getAllBooks(): List<BookEntity>?

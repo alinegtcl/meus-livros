@@ -66,4 +66,13 @@ class BookControlViewModel(private val useCase: BookControlUseCase) : ViewModel(
             _stateManagement.value = ManageBookState.UpdateSuccess
         }
     }
+
+    fun delete(book: Book) {
+        viewModelScope.launch {
+            _stateManagement.value = ManageBookState.ShowLoading
+            useCase.delete(book)
+            _stateManagement.value = ManageBookState.HideLoading
+            _stateManagement.value = ManageBookState.DeleteSuccess
+        }
+    }
 }

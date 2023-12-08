@@ -8,6 +8,8 @@ interface BookControlUseCase {
 
     suspend fun update(book: Book)
 
+    suspend fun delete(book: Book)
+
     suspend fun getAllBooks(): MBResult<List<Book>, String>
 
     suspend fun getBookById(id: Int): MBResult<Book, String>

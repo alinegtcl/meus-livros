@@ -87,16 +87,25 @@ class ManageBookFragment : Fragment() {
                         ).show()
                         findNavController().popBackStack()
                     }
+
+                    ManageBookState.DeleteSuccess -> {
+                        Toast.makeText(
+                            activity, getString(R.string.label_deleted_book),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        findNavController().popBackStack()
+                    }
                 }
             }
         }
     }
 
-    private fun fillFields(book: Book) {
+    private fun fillFields(searchBook: Book) {
+        book = searchBook
         binding.apply {
-            editTextBookName.setText(book.name)
-            editTextWriters.setText(book.writer)
-            editTextStatus.setText(book.status)
+            editTextBookName.setText(searchBook.name)
+            editTextWriters.setText(searchBook.writer)
+            editTextStatus.setText(searchBook.status)
             buttonAddBook.visibility = View.GONE
             buttonUpdateBook.visibility = View.VISIBLE
             buttonDeleteBook.visibility = View.VISIBLE
@@ -124,6 +133,9 @@ class ManageBookFragment : Fragment() {
                 )
             }
             viewModel.update(book)
+        }
+        binding.buttonDeleteBook.setOnClickListener {
+            viewModel.delete(book)
         }
     }
 

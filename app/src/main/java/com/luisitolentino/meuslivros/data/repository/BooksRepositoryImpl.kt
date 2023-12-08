@@ -16,6 +16,10 @@ class BooksRepositoryImpl(private val booksDao: BooksDao) : BookControlUseCase {
         booksDao.update(toBookEntity(book))
     }
 
+    override suspend fun delete(book: Book) {
+        booksDao.delete(toBookEntity(book))
+    }
+
     private fun toBookEntity(book: Book): BookEntity {
         return BookEntity(book.id, book.name, book.writer, book.synopsis, book.status)
     }
