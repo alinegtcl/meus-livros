@@ -57,4 +57,13 @@ class BookControlViewModel(private val useCase: BookControlUseCase) : ViewModel(
             )
         }
     }
+
+    fun update(book: Book) {
+        viewModelScope.launch {
+            _stateManagement.value = ManageBookState.ShowLoading
+            useCase.update(book)
+            _stateManagement.value = ManageBookState.HideLoading
+            _stateManagement.value = ManageBookState.UpdateSuccess
+        }
+    }
 }

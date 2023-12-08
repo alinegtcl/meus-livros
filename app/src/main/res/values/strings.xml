@@ -2,8 +2,11 @@
     <string name="app_name">Meus Livros</string>
     <string name="label_you_dont_have_books">Você ainda não tem livros adicionados</string>
     <string name="label_add_book">Adicionar livro</string>
-    <string name="label_book_name">Nome do Livro</string>
+    <string name="label_book_name">Nome do livro</string>
     <string name="label_book_writers">Autor(es)</string>
     <string name="label_book_status">Status da sua leitura</string>
     <string name="label_added_book">Livro adicionado! Boa leitura!</string>
+    <string name="label_changed_book">Livro alterado! Boa leitura!</string>
+    <string name="label_delete_book">Deletar livro</string>
+    <string name="label_update_book">Salvar alterações</string>
 </resources>

@@ -40,7 +40,7 @@ class ManageBookFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupBundleId()
         setupViewmodel()
-        setupAddBookButton()
+        setupManagementBookButtons()
         setupView()
     }
 
@@ -57,7 +57,11 @@ class ManageBookFragment : Fragment() {
     }
 
     private fun setupAddBook() {
-        binding.buttonAddBook.visibility = View.VISIBLE
+        binding.apply {
+            buttonAddBook.visibility = View.VISIBLE
+            buttonUpdateBook.visibility = View.GONE
+            buttonDeleteBook.visibility = View.GONE
+        }
     }
 
     private fun setupViewmodel() {
@@ -76,6 +80,13 @@ class ManageBookFragment : Fragment() {
 
                     is ManageBookState.Failure -> {}
                     is ManageBookState.GetByIdSuccess -> fillFields(it.book)
+                    ManageBookState.UpdateSuccess -> {
+                        Toast.makeText(
+                            activity, getString(R.string.label_changed_book),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        findNavController().popBackStack()
+                    }
                 }
             }
         }
@@ -87,12 +98,13 @@ class ManageBookFragment : Fragment() {
             editTextWriters.setText(book.writer)
             editTextStatus.setText(book.status)
             buttonAddBook.visibility = View.GONE
+            buttonUpdateBook.visibility = View.VISIBLE
+            buttonDeleteBook.visibility = View.VISIBLE
         }
     }
 
-    private fun setupAddBookButton() {
+    private fun setupManagementBookButtons() {
         binding.buttonAddBook.setOnClickListener {
-
             binding.apply {
                 book = Book(
                     editTextBookName.text.toString(),
@@ -100,8 +112,18 @@ class ManageBookFragment : Fragment() {
                     editTextStatus.text.toString()
                 )
             }
-
             viewModel.insert(book)
+        }
+        binding.buttonUpdateBook.setOnClickListener {
+            binding.apply {
+                book = Book(
+                    editTextBookName.text.toString(),
+                    editTextWriters.text.toString(),
+                    editTextStatus.text.toString(),
+                    id = bookId
+                )
+            }
+            viewModel.update(book)
         }
     }
 

@@ -12,6 +12,10 @@ class BooksRepositoryImpl(private val booksDao: BooksDao) : BookControlUseCase {
         booksDao.insert(toBookEntity(book))
     }
 
+    override suspend fun update(book: Book) {
+        booksDao.update(toBookEntity(book))
+    }
+
     private fun toBookEntity(book: Book): BookEntity {
         return BookEntity(book.id, book.name, book.writer, book.synopsis, book.status)
     }
