@@ -21,6 +21,6 @@ class BooksRepositoryImpl(private val booksDao: BooksDao) : BookControlUseCase {
     }
 
     private fun toDomain(books: List<BookEntity>): List<Book> {
-        return books.map { Book(it.id, it.name, it.writer, it.synopsis, it.status) }
+        return books.map { Book(it.name, it.writer, it.status, it.synopsis, it.id) }
     }
 }

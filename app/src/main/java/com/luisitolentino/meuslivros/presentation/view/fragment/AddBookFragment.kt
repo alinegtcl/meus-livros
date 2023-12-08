@@ -21,9 +21,8 @@ class AddBookFragment : Fragment() {
 
     private var _binding: FragmentAddBookBinding? = null
     private val binding get() = _binding!!
-    private var book = Book(
-        name = "Teste", writer = "Aline", status = "em progresso"
-    )
+
+    private lateinit var book: Book
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,6 +58,15 @@ class AddBookFragment : Fragment() {
 
     private fun setupAddBookButton() {
         binding.buttonAddBook.setOnClickListener {
+
+            binding.apply {
+                book = Book(
+                    editTextBookName.text.toString(),
+                    editTextWriters.text.toString(),
+                    editTextStatus.text.toString()
+                )
+            }
+
             viewModel.insert(book)
         }
     }
