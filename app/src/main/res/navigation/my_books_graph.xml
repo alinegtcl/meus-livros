@@ -7,7 +7,16 @@
 
     <fragment
         android:id="@+id/listBookFragment"
-        android:name="com.luisitolentino.meuslivros.presentation.view.ListBookFragment"
+        android:name="com.luisitolentino.meuslivros.presentation.view.fragment.ListBookFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/fragment_list_book" />
+        tools:layout="@layout/fragment_list_book">
+        <action
+            android:id="@+id/go_to_addBookFragment"
+            app:destination="@id/addBookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addBookFragment"
+        android:name="com.luisitolentino.meuslivros.presentation.view.fragment.ManageBookFragment"
+        android:label="@string/label_add_book"
+        tools:layout="@layout/fragment_add_book" />
 </navigation>
