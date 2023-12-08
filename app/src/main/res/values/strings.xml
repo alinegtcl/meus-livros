@@ -5,4 +5,5 @@
     <string name="label_book_name">Nome do Livro</string>
     <string name="label_book_writers">Autor(es)</string>
     <string name="label_book_status">Status da sua leitura</string>
+    <string name="label_added_book">Livro adicionado! Boa leitura!</string>
 </resources>

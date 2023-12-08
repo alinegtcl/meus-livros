@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/addBookFragment"
-        android:name="com.luisitolentino.meuslivros.presentation.view.fragment.AddBookFragment"
-        android:label="fragment_add_book"
+        android:name="com.luisitolentino.meuslivros.presentation.view.fragment.ManageBookFragment"
+        android:label="@string/label_add_book"
         tools:layout="@layout/fragment_add_book" />
 </navigation>

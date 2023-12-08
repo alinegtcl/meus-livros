@@ -14,14 +14,14 @@ class BookControlViewModel(private val useCase: BookControlUseCase) : ViewModel(
     private val _stateList = MutableStateFlow<ListBookState>(ListBookState.HideLoading)
     val stateList = _stateList.asStateFlow()
 
-    private val _stateManagement = MutableStateFlow<AddBookState>(AddBookState.HideLoading)
+    private val _stateManagement = MutableStateFlow<ManageBookState>(ManageBookState.HideLoading)
     val stateManagement = _stateManagement.asStateFlow()
     fun insert(book: Book) {
         viewModelScope.launch {
-            _stateManagement.value = AddBookState.ShowLoading
+            _stateManagement.value = ManageBookState.ShowLoading
             useCase.insert(book)
-            _stateManagement.value = AddBookState.HideLoading
-            _stateManagement.value = AddBookState.InsertSuccess
+            _stateManagement.value = ManageBookState.HideLoading
+            _stateManagement.value = ManageBookState.InsertSuccess
         }
     }
 
@@ -37,7 +37,22 @@ class BookControlViewModel(private val useCase: BookControlUseCase) : ViewModel(
                     else
                         _stateList.value = ListBookState.EmptyState
                 }, {
-                    _stateList.value = ListBookState.Failure
+                    _stateList.value = ListBookState.Failure(it)
+                }
+            )
+        }
+    }
+
+    fun getBookById(id: Int) {
+        viewModelScope.launch {
+            _stateManagement.value = ManageBookState.ShowLoading
+            val response = useCase.getBookById(id)
+            _stateManagement.value = ManageBookState.HideLoading
+            response.flow(
+                { book ->
+                    _stateManagement.value = ManageBookState.GetByIdSuccess(book)
+                }, {
+                    _stateManagement.value = ManageBookState.Failure(it)
                 }
             )
         }

@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.luisitolentino.meuslivros.R
 import com.luisitolentino.meuslivros.databinding.FragmentListBookBinding
 import com.luisitolentino.meuslivros.domain.model.Book
+import com.luisitolentino.meuslivros.domain.utils.Constants.LABEL_PUT_EXTRA_BOOK_ID
 import com.luisitolentino.meuslivros.presentation.view.adapter.BookAdapter
 import com.luisitolentino.meuslivros.presentation.viewmodel.BookControlViewModel
 import com.luisitolentino.meuslivros.presentation.viewmodel.ListBookState
@@ -49,7 +50,7 @@ class ListBookFragment : Fragment() {
             viewModel.stateList.collect {
                 when (it) {
                     ListBookState.EmptyState -> binding.textEmptyState.visibility = View.VISIBLE
-                    ListBookState.Failure -> {}
+                    is ListBookState.Failure -> {}
                     ListBookState.HideLoading -> binding.loadingListBook.visibility = View.GONE
                     ListBookState.ShowLoading -> binding.loadingListBook.visibility = View.VISIBLE
                     is ListBookState.SearchAllSuccess -> setupRecycler(it.books)
@@ -64,12 +65,17 @@ class ListBookFragment : Fragment() {
     }
 
     private fun onBookClick(book: Book) {
-        // direcionar para a tela de exibição
+        val bundle = Bundle()
+        bundle.putInt(LABEL_PUT_EXTRA_BOOK_ID, book.id)
+        findNavController().navigate(R.id.go_to_addBookFragment, bundle)
+
     }
 
     private fun setupAddBookButton() {
         binding.buttonAddNewBook.setOnClickListener {
-            findNavController().navigate(R.id.go_to_addBookFragment)
+            val bundle = Bundle()
+            bundle.putInt(LABEL_PUT_EXTRA_BOOK_ID, -1)
+            findNavController().navigate(R.id.go_to_addBookFragment, Bundle())
         }
     }
 

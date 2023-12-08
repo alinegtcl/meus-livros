@@ -8,14 +8,17 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.luisitolentino.meuslivros.R
 import com.luisitolentino.meuslivros.databinding.FragmentAddBookBinding
 import com.luisitolentino.meuslivros.domain.model.Book
-import com.luisitolentino.meuslivros.presentation.viewmodel.AddBookState
+import com.luisitolentino.meuslivros.domain.utils.Constants.LABEL_PUT_EXTRA_BOOK_ID
 import com.luisitolentino.meuslivros.presentation.viewmodel.BookControlViewModel
+import com.luisitolentino.meuslivros.presentation.viewmodel.ManageBookState
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.properties.Delegates
 
-class AddBookFragment : Fragment() {
+class ManageBookFragment : Fragment() {
 
     private val viewModel: BookControlViewModel by viewModel()
 
@@ -23,6 +26,7 @@ class AddBookFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var book: Book
+    private var bookId by Delegates.notNull<Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,25 +38,55 @@ class AddBookFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupBundleId()
         setupViewmodel()
         setupAddBookButton()
+        setupView()
+    }
+
+    private fun setupBundleId() {
+        bookId = requireArguments().getInt(LABEL_PUT_EXTRA_BOOK_ID)
+    }
+
+    private fun setupView() {
+        if (bookId != 0) {
+            viewModel.getBookById(bookId)
+        } else {
+            setupAddBook()
+        }
+    }
+
+    private fun setupAddBook() {
+        binding.buttonAddBook.visibility = View.VISIBLE
     }
 
     private fun setupViewmodel() {
         lifecycleScope.launch {
             viewModel.stateManagement.collect {
                 when (it) {
-                    AddBookState.HideLoading -> {}
-                    AddBookState.ShowLoading -> {}
-                    AddBookState.InsertSuccess -> {
+                    ManageBookState.HideLoading -> {}
+                    ManageBookState.ShowLoading -> {}
+                    ManageBookState.InsertSuccess -> {
                         Toast.makeText(
-                            activity, "Livro adicionado! Boa leitura!",
+                            activity, getString(R.string.label_added_book),
                             Toast.LENGTH_SHORT
                         ).show()
                         findNavController().popBackStack()
                     }
+
+                    is ManageBookState.Failure -> {}
+                    is ManageBookState.GetByIdSuccess -> fillFields(it.book)
                 }
             }
+        }
+    }
+
+    private fun fillFields(book: Book) {
+        binding.apply {
+            editTextBookName.setText(book.name)
+            editTextWriters.setText(book.writer)
+            editTextStatus.setText(book.status)
+            buttonAddBook.visibility = View.GONE
         }
     }
 

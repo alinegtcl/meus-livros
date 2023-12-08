@@ -17,10 +17,22 @@ class BooksRepositoryImpl(private val booksDao: BooksDao) : BookControlUseCase {
     }
 
     override suspend fun getAllBooks(): MBResult<List<Book>, String> {
-        return MBResult.Success(toDomain(booksDao.getAllBooks()))
+        val response = booksDao.getAllBooks()
+        return if (response != null)
+            MBResult.Success(toDomain(response))
+        else MBResult.Error("Você não tem livros cadastrados")
     }
 
     private fun toDomain(books: List<BookEntity>): List<Book> {
         return books.map { Book(it.name, it.writer, it.status, it.synopsis, it.id) }
+    }
+
+    override suspend fun getBookById(id: Int): MBResult<Book, String> {
+        val response = booksDao.getBookById(id)
+        return if (response != null) {
+            MBResult.Success(response)
+        } else {
+            MBResult.Error("Livro não encontrado")
+        }
     }
 }

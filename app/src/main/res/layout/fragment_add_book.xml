@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_marginHorizontal="16dp"
     android:orientation="vertical"
-    tools:context=".presentation.view.fragment.AddBookFragment">
+    tools:context=".presentation.view.fragment.ManageBookFragment">
 
     <EditText
         android:id="@+id/editTextBookName"
