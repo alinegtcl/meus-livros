@@ -58,6 +58,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("io.insert-koin:koin-android:3.1.2")
 
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
     testImplementation ("io.mockk:mockk:1.12.5")
     testImplementation ("androidx.arch.core:core-testing:2.1.0")
     testImplementation ("io.insert-koin:koin-test-junit4:3.1.2")
